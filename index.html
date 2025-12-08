@@ -4,164 +4,112 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Zeerak Kafeel — Portfolio</title>
+
 <style>
   :root {
     --bg1: #02040a;
     --bg2: #060d1a;
     --accent: #9be7ff;
-    --name-size: clamp(2rem, 5vw, 4rem);
-    --tag-size: clamp(1rem, 2.5vw, 1.5rem);
+    --name-size: clamp(2.2rem, 7vw, 4.5rem);
+    --tag-size: clamp(1rem, 4vw, 1.7rem);
+    --text-size: clamp(0.9rem, 2vw, 1.1rem);
   }
 
   html, body {
     margin: 0;
     font-family: "Inter", sans-serif;
     color: #fff;
-    height: 100%;
-    overflow-x: hidden;
+    background:
+      radial-gradient(1.5px 1.5px at 15% 25%, rgba(255,255,255,0.8), transparent),
+      radial-gradient(1px 1px at 70% 70%, rgba(255,255,255,0.6), transparent),
+      linear-gradient(180deg, var(--bg1), var(--bg2));
+    background-size: 200px 200px, 250px 250px, 100% 100%;
     scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
   }
 
   body {
-    background:
-      radial-gradient(2px 2px at 15% 25%, rgba(255,255,255,0.9) 50%, transparent 51%),
-      radial-gradient(1.5px 1.5px at 70% 70%, rgba(255,255,255,0.8) 50%, transparent 51%),
-      radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.6) 50%, transparent 51%),
-      radial-gradient(0.8px 0.8px at 80% 30%, rgba(255,255,255,0.5) 50%, transparent 51%),
-      linear-gradient(180deg, var(--bg1), var(--bg2));
-    background-repeat: repeat;
-    background-size: 150px 150px, 200px 200px, 250px 250px, 100px 100px, 100% 100%;
-    animation: star-spin 180s linear infinite;
+    overflow-x: hidden;
   }
 
-  @keyframes star-spin {
-    from {
-      background-position:
-        15% 25%, 70% 70%, 40% 80%, 80% 30%, 0 0;
-    }
-    to {
-      background-position:
-        375% 25%, -290% 70%, 400% 80%, -280% 30%, 0 0;
-    }
-  }
-
-  /* Fullscreen sections */
   section {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    min-height: 100vh;
+    padding: clamp(2rem, 5vw, 4rem);
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    scroll-snap-align: start;
-    padding: 2rem;
-    box-sizing: border-box;
     text-align: center;
   }
 
-  /* Hero Section */
+  /* ---------- HERO ---------- */
   .name {
     font-size: var(--name-size);
     font-weight: 800;
     color: var(--accent);
-    margin: 0.5rem 0;
-    text-shadow: 0 0 10px var(--accent);
-    animation: flicker 2s infinite;
-  }
-
-  @keyframes flicker {
-    0%,100% { text-shadow: 0 0 10px var(--accent),0 0 20px var(--accent),0 0 30px var(--accent); }
-    20% { text-shadow: 0 0 5px var(--accent),0 0 15px var(--accent),0 0 25px var(--accent); }
-    40% { text-shadow: 0 0 12px var(--accent),0 0 22px var(--accent),0 0 32px var(--accent); }
-    60% { text-shadow: 0 0 8px var(--accent),0 0 18px var(--accent),0 0 28px var(--accent); }
-    80% { text-shadow: 0 0 10px var(--accent),0 0 20px var(--accent),0 0 30px var(--accent); }
+    text-shadow: 0 0 14px var(--accent);
+    margin-bottom: 0.5rem;
   }
 
   .tagline {
     font-size: var(--tag-size);
-    font-weight: 500;
-    opacity: 0.85;
-    margin-top: 0.5rem;
-    text-shadow: 0 0 5px #9be7ff88;
-    min-height: 1.5em;
+    border-right: 2px solid var(--accent);
     white-space: nowrap;
     overflow: hidden;
-    border-right: 2px solid var(--accent);
-    animation: blink-caret 0.8s step-end infinite;
+    height: 1.5em;
+    animation: caret-blink 0.8s infinite;
   }
 
-  @keyframes blink-caret {
+  @keyframes caret-blink {
     50% { border-color: transparent; }
   }
 
-  /* Section headings */
-  h1 {
+  /* ---------- ABOUT ---------- */
+  #about h2, #contact h2, #tech h1 {
     color: var(--accent);
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: clamp(1.5rem, 4vw, 2.3rem);
   }
 
-  p {
-    line-height: 1.6;
-    font-size: 1.1rem;
-  }
-
-  a {
-    color: var(--accent);
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
-
-  /* About Card */
   .about-card {
     display: flex;
     flex-direction: row;
-    align-items: center;
     gap: 2rem;
-    background: rgba(155, 231, 255, 0.05);
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(155, 231, 255, 0.1);
     max-width: 900px;
-    margin: 0 auto;
+    padding: 1.8rem;
+    background: rgba(155, 231, 255, 0.08);
+    border-radius: 14px;
+    box-shadow: 0 0 25px rgba(155,231,255,0.15);
     flex-wrap: wrap;
-    transition: all 0.3s ease;
   }
 
-  .about-card:hover {
-    box-shadow: 0 0 40px rgba(155, 231, 255, 0.6);
-    transform: translateY(-5px);
+  .about-image {
+    flex: 1 1 240px;
   }
 
-  .about-card .about-image {
-    flex: 1 1 200px;
-    max-width: 250px;
-  }
 
-  .about-card .about-image img {
+  .about-image img {
     width: 100%;
     border-radius: 12px;
     border: 2px solid var(--accent);
-    box-shadow: 0 0 15px rgba(155, 231, 255, 0.3);
+    box-shadow: 0 0 10px rgba(155, 231, 255, 0.4);
   }
 
-  .about-card .about-text {
-    flex: 2 1 300px;
+  .about-text {
+    flex: 2 1 320px;
     text-align: left;
-    font-size: 1.1rem;
+    font-size: var(--text-size);
     line-height: 1.6;
   }
 
-  /* Tech Stack Grid - 8 columns */
+  /* ---------- TECH GRID ---------- */
   .tech-grid {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
     gap: 2rem;
-    justify-items: center;
-    align-items: center;
+    max-width: 1200px;
+    width: 100%;
     margin-top: 2rem;
   }
 
@@ -169,9 +117,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-    animation: glow 2s infinite;
+    transition: 0.3s ease;
   }
 
   .tech-item img {
@@ -179,7 +125,7 @@
     height: 60px;
     object-fit: contain;
     margin-bottom: 0.5rem;
-    filter: drop-shadow(0 0 5px rgba(155, 231, 255, 0.5));
+    filter: drop-shadow(0 0 4px rgba(155,231,255,0.4));
   }
 
   .tech-item span {
@@ -188,30 +134,18 @@
   }
 
   .tech-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 20px rgba(155, 231, 255, 0.6);
+    transform: translateY(-6px);
   }
 
-  @keyframes glow {
-    0%,100% { filter: drop-shadow(0 0 5px #9be7ff) drop-shadow(0 0 10px #9be7ff); }
-    50% { filter: drop-shadow(0 0 10px #9be7ff) drop-shadow(0 0 20px #9be7ff); }
-  }
-
-  /* Contact Form */
+  /* ---------- CONTACT ---------- */
   .contact-form-container {
-    background: rgba(155, 231, 255, 0.1);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(155, 231, 255, 0.2);
     max-width: 600px;
-    margin: 0 auto;
+    width: 100%;
+    padding: 2rem;
+    background: rgba(155,231,255,0.08);
+    border-radius: 14px;
+    box-shadow: 0 0 20px rgba(155,231,255,0.15);
     text-align: left;
-  }
-
-  .contact-form-container form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
   }
 
   .input-group {
@@ -220,269 +154,194 @@
   }
 
   .input-group label {
-    font-weight: 600;
-    margin-bottom: 0.5rem;
     color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.4rem;
   }
 
   .input-group input,
   .input-group textarea {
     padding: 1rem;
-    font-size: 1rem;
-    border: 2px solid var(--accent);
     border-radius: 8px;
+    border: 2px solid var(--accent);
     background: #02040a;
     color: #fff;
-    transition: border 0.3s ease;
-  }
-
-  .input-group input:focus,
-  .input-group textarea:focus {
-    border-color: #9be7ff;
-    outline: none;
-  }
-
-  .input-group input::placeholder,
-  .input-group textarea::placeholder {
-    color: rgba(155, 231, 255, 0.6);
+    font-size: 1rem;
   }
 
   .submit-btn {
+    margin-top: 0.5rem;
     padding: 1rem;
-    font-size: 1.1rem;
     background: var(--accent);
     color: #02040a;
-    border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
+    font-weight: 600;
+    transition: 0.3s ease;
+    border: none;
   }
 
   .submit-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 20px rgba(155, 231, 255, 0.4);
+    transform: translateY(-4px);
   }
 
-  @media(max-width: 768px) {
-    .contact-form-container {
-      padding: 1.5rem;
-    }
-
-    .submit-btn {
-      padding: 0.8rem;
-    }
+  /* ---------- MOBILE ---------- */
+  @media(max-width: 700px) {
+    .about-card { text-align: center; }
+    .about-text { text-align: center; }
   }
 </style>
 </head>
+
 <body>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="name">Zeerak Kafeel</div>
-    <div class="tagline" id="tagline"></div>
-  </section>
+<!-- HERO -->
+<section class="hero">
+  <div class="name">Zeerak Kafeel</div>
+  <div class="tagline" id="tagline"></div>
+</section>
 
-  <!-- About Me Section -->
-  <section id="about">
-    <h2>About Me</h2>
-    
-    <div class="about-card">
-      <div class="about-image">
-        <img src="./assets/me.png" alt="Zeerak Kafeel">
-      </div>
-      <div class="about-text">
-        <p>Hello! I'm Zeerak Kafeel, a <strong>Full Stack Developer</strong> with a passion for building scalable web applications. I also specialize in <strong>cloud solutions</strong>, enabling efficient and secure deployment of modern applications.</p>
-      </div>
+<!-- ABOUT -->
+<section id="about">
+  <h2>About Me</h2>
+  <div class="about-card">
+    <div class="about-image">
+      <img class="me-image" src="./assets/me.png" alt="Portrait of Zeerak Kafeel">
     </div>
-  </section>
 
-  <!-- Tech Stack Section -->
-  <section id="tech">
-    <h1>Tech Stack</h1>
-    <div class="tech-grid">
-      <div class="tech-item">
-        <img src="./assets/tech/Azure.png" alt=".NET">
-        <span>Azure</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/AWS.png" alt="CSS">
-        <span>Aws</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/Google Cloud.png" alt="JavaScript">
-        <span>GCS</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/CSharp.png" alt="React">
-        <span>C#</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/Python.png" alt="Node.js">
-        <span>Python</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/JavaScript.png" alt="Express">
-        <span>JavaScript</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/TypeScript.png" alt="MongoDB">
-        <span>TypeScript</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/NET.png" alt=".NET">
-        <span>.Net Framework</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/NET core.png" alt="CSS">
-        <span>.Net Core</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/jQuery.png" alt="JavaScript">
-        <span>Jquery</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/Angular.png" alt="React">
-        <span>Angular</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/React.png" alt="Node.js">
-        <span>React</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/Azure SQL Database.png" alt="Express">
-        <span>Azure DB</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/Microsoft SQL Server.png" alt="MongoDB">
-        <span>Sql Server</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/Cosmos BD.png" alt="AWS">
-        <span>Cosmos DB</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/MySQL.png" alt="Express">
-        <span>My Sql</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/MongoDB.png" alt="MongoDB">
-        <span>MongoDB</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/GitHub.png" alt="MongoDB">
-        <span>Github</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/Azure Devops.png" alt="MongoDB">
-        <span>Azure Devops</span>
-      </div>
-      <div class="tech-item">
-        <img src="./assets/tech/Git.png" alt="MongoDB">
-        <span>Git</span>
-      </div>
+    <div class="about-text">
+      <p>
+        Hello! I'm <strong>Zeerak Kafeel</strong>, a <strong>Full Stack Developer</strong> specializing in
+        scalable web applications and <strong>cloud-based deployment solutions</strong>.
+      </p>
     </div>
-  </section>
+  </div>
+</section>
 
- <!-- Contact Me Section -->
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <p>If you'd like to get in touch, feel free to drop a message. I'll get back to you as soon as possible.</p>
-    
-    <div class="contact-form-container">
-      <form id="contact-form">
-        <div class="input-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" placeholder="Your Name" required />
-        </div>
-        <div class="input-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="Your Email" required />
-        </div>
-        <div class="input-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
-        </div>
-        <button type="submit" class="submit-btn">Send Message</button>
-      </form>
-    </div>
-    <p>Alternatively, you can reach me at <a href="mailto:zeerak@example.com">zeerak@example.com</a> or follow me on <a href="https://www.linkedin.com/in/zeerakkafeel/">LinkedIn</a> / <a href="https://github.com/IamZeek">GitHub</a>.</p>
-  </section>
+<!-- TECH -->
+<section id="tech">
+  <h1>Tech Stack</h1>
 
-  <!-- Typing Script for Tagline -->
-  <script>
-    const phrases = [
-      "Frontend Developer",
-      "Backend Developer",
-      "FullStack Developer",
-      "Cloud Solution Architect"
-    ];
+  <div class="tech-grid">
 
-    const taglineEl = document.getElementById("tagline");
+    <!-- Cloud -->
+    <div class="tech-item"><img src="./assets/tech/Azure.png"><span>Azure</span></div>
+    <div class="tech-item"><img src="./assets/tech/AWS.png"><span>AWS</span></div>
+    <div class="tech-item"><img src="./assets/tech/Google Cloud.png"><span>GCP</span></div>
 
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typingSpeed = 100;
-    const deletingSpeed = 50;
-    const delayAfterComplete = 2000;
+    <!-- Languages -->
+    <div class="tech-item"><img src="./assets/tech/CSharp.png"><span>C#</span></div>
+    <div class="tech-item"><img src="./assets/tech/Python.png"><span>Python</span></div>
+    <div class="tech-item"><img src="./assets/tech/JavaScript.png"><span>JavaScript</span></div>
+    <div class="tech-item"><img src="./assets/tech/TypeScript.png"><span>TypeScript</span></div>
 
-    function type() {
-      const currentPhrase = phrases[phraseIndex];
+    <!-- Frameworks -->
+    <div class="tech-item"><img src="./assets/tech/NET.png"><span>.NET Framework</span></div>
+    <div class="tech-item"><img src="./assets/tech/NET core.png"><span>.NET Core</span></div>
+    <div class="tech-item"><img src="./assets/tech/jQuery.png"><span>jQuery</span></div>
+    <div class="tech-item"><img src="./assets/tech/Angular.png"><span>Angular</span></div>
+    <div class="tech-item"><img src="./assets/tech/React.png"><span>React</span></div>
 
-      if (!isDeleting) {
-        taglineEl.textContent = currentPhrase.slice(0, charIndex + 1);
-        charIndex++;
+    <!-- Databases -->
+    <div class="tech-item"><img src="./assets/tech/Azure SQL Database.png"><span>Azure SQL</span></div>
+    <div class="tech-item"><img src="./assets/tech/Microsoft SQL Server.png"><span>SQL Server</span></div>
+    <div class="tech-item"><img src="./assets/tech/Cosmos BD.png"><span>Cosmos DB</span></div>
+    <div class="tech-item"><img src="./assets/tech/MySQL.png"><span>MySQL</span></div>
+    <div class="tech-item"><img src="./assets/tech/MongoDB.png"><span>MongoDB</span></div>
 
-        if (charIndex === currentPhrase.length) {
-          isDeleting = true;
-          setTimeout(type, delayAfterComplete);
-          return;
-        }
-      } else {
-        taglineEl.textContent = currentPhrase.slice(0, charIndex - 1);
-        charIndex--;
+    <!-- Tools -->
+    <div class="tech-item"><img src="./assets/tech/GitHub.png"><span>GitHub</span></div>
+    <div class="tech-item"><img src="./assets/tech/Azure Devops.png"><span>Azure DevOps</span></div>
+    <div class="tech-item"><img src="./assets/tech/Git.png"><span>Git</span></div>
 
-        if (charIndex === 0) {
-          isDeleting = false;
-          phraseIndex = (phraseIndex + 1) % phrases.length;
-        }
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact Me</h2>
+  <p>Feel free to get in touch. I'll respond as soon as possible.</p>
+
+  <div class="contact-form-container">
+    <form id="contact-form">
+      <div class="input-group">
+        <label>Name</label>
+        <input type="text" name="name" required>
+      </div>
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" name="email" required>
+      </div>
+      <div class="input-group">
+        <label>Message</label>
+        <textarea name="message" rows="5" required></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+  </div>
+
+  <p>
+    Alternatively:  
+    <a href="mailto:zeerak@example.com">Email</a> •
+    <a href="https://www.linkedin.com/in/zeerakkafeel/">LinkedIn</a> •
+    <a href="https://github.com/IamZeek">GitHub</a>
+  </p>
+</section>
+
+<!-- Typer Script -->
+<script>
+  const phrases = [
+    "Frontend Developer",
+    "Backend Developer",
+    "Full Stack Developer",
+    "Cloud Solution Architect"
+  ];
+
+  const el = document.getElementById("tagline");
+  let i = 0, j = 0, deleting = false;
+
+  function typeEffect() {
+    let word = phrases[i];
+
+    if (!deleting) {
+      el.textContent = word.substring(0, j++);
+      if (j === word.length + 1) {
+        deleting = true;
+        setTimeout(typeEffect, 1200);
+        return;
       }
-
-      setTimeout(type, isDeleting ? deletingSpeed : typingSpeed);
+    } else {
+      el.textContent = word.substring(0, j--);
+      if (j < 0) {
+        deleting = false;
+        i = (i + 1) % phrases.length;
+      }
     }
 
-    type();
-  </script>
-  <!-- EmailJS Integration -->
-  <script type="text/javascript">
-    // Initialize EmailJS with your user ID
-    emailjs.init("user_your_api_key_here");
+    setTimeout(typeEffect, deleting ? 60 : 90);
+  }
 
-    // Handle form submission
-    document.getElementById("contact-form").addEventListener("submit", function(event) {
-      event.preventDefault();
+  typeEffect();
+</script>
 
-      const form = event.target;
-      const name = form.name.value;
-      const email = form.email.value;
-      const message = form.message.value;
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  emailjs.init("YOUR_EMAILJS_PUBLIC_KEY");
 
-      const templateParams = {
-        name: name,
-        email: email,
-        message: message
-      };
+  document.getElementById("contact-form").addEventListener("submit", function(e){
+    e.preventDefault();
 
-      // Send email using EmailJS
-      emailjs.send("service_id", "template_id", templateParams)
-        .then(function(response) {
-          alert("Message sent successfully!");
-          form.reset(); // Reset the form after successful submission
-        }, function(error) {
-          alert("Failed to send message. Please try again later.");
-        });
-    });
-  </script>
+    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+      name: this.name.value,
+      email: this.email.value,
+      message: this.message.value
+    })
+    .then(() => alert("Message sent!"))
+    .catch(() => alert("Failed to send message."));
+  });
+</script>
 
 </body>
 </html>
