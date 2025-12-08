@@ -20,13 +20,24 @@
     font-family: "Inter", sans-serif;
     color: #fff;
     background:
-      radial-gradient(1.5px 1.5px at 15% 25%, rgba(255,255,255,0.8), transparent),
-      radial-gradient(1px 1px at 70% 70%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(2px 2px at 15% 25%, rgba(255,255,255,0.9) 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 70% 70%, rgba(255,255,255,0.8) 50%, transparent 51%),
+      radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.6) 50%, transparent 51%),
+      radial-gradient(0.8px 0.8px at 80% 30%, rgba(255,255,255,0.5) 50%, transparent 51%),
       linear-gradient(180deg, var(--bg1), var(--bg2));
-    background-size: 200px 200px, 250px 250px, 100% 100%;
-    scroll-behavior: smooth;
+     background-size: 150px 150px, 200px 200px, 250px 250px, 100px 100px, 100% 100%;
+    animation: star-spin 180s linear infinite;
   }
-
+ @keyframes star-spin {
+    from {
+      background-position:
+        15% 25%, 70% 70%, 40% 80%, 80% 30%, 0 0;
+    }
+    to {
+      background-position:
+        375% 25%, -290% 70%, 400% 80%, -280% 30%, 0 0;
+    }
+  }
   body {
     overflow-x: hidden;
   }
