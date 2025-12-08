@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Zeerak Kafeel — Portfolio</title>
+<style>
+  :root {
+    --bg1: #02040a;
+    --bg2: #060d1a;
+    --accent: #9be7ff;
+    --name-size: clamp(2rem, 5vw, 4rem);
+    --tag-size: clamp(1rem, 2.5vw, 1.5rem);
+  }
+
+  html, body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    color: #fff;
+    height: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+  }
+
+  body {
+    background:
+      radial-gradient(2px 2px at 15% 25%, rgba(255,255,255,0.9) 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 70% 70%, rgba(255,255,255,0.8) 50%, transparent 51%),
+      radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.6) 50%, transparent 51%),
+      radial-gradient(0.8px 0.8px at 80% 30%, rgba(255,255,255,0.5) 50%, transparent 51%),
+      linear-gradient(180deg, var(--bg1), var(--bg2));
+    background-repeat: repeat;
+    background-size: 150px 150px, 200px 200px, 250px 250px, 100px 100px, 100% 100%;
+    animation: star-spin 180s linear infinite;
+  }
+
+  @keyframes star-spin {
+    from {
+      background-position:
+        15% 25%, 70% 70%, 40% 80%, 80% 30%, 0 0;
+    }
+    to {
+      background-position:
+        375% 25%, -290% 70%, 400% 80%, -280% 30%, 0 0;
+    }
+  }
+
+  /* Fullscreen sections */
+  section {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+    padding: 2rem;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  /* Hero Section */
+  .name {
+    font-size: var(--name-size);
+    font-weight: 800;
+    color: var(--accent);
+    margin: 0.5rem 0;
+    text-shadow: 0 0 10px var(--accent);
+    animation: flicker 2s infinite;
+  }
+
+  @keyframes flicker {
+    0%,100% { text-shadow: 0 0 10px var(--accent),0 0 20px var(--accent),0 0 30px var(--accent); }
+    20% { text-shadow: 0 0 5px var(--accent),0 0 15px var(--accent),0 0 25px var(--accent); }
+    40% { text-shadow: 0 0 12px var(--accent),0 0 22px var(--accent),0 0 32px var(--accent); }
+    60% { text-shadow: 0 0 8px var(--accent),0 0 18px var(--accent),0 0 28px var(--accent); }
+    80% { text-shadow: 0 0 10px var(--accent),0 0 20px var(--accent),0 0 30px var(--accent); }
+  }
+
+  .tagline {
+    font-size: var(--tag-size);
+    font-weight: 500;
+    opacity: 0.85;
+    margin-top: 0.5rem;
+    text-shadow: 0 0 5px #9be7ff88;
+    min-height: 1.5em;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid var(--accent);
+    animation: blink-caret 0.8s step-end infinite;
+  }
+
+  @keyframes blink-caret {
+    50% { border-color: transparent; }
+  }
+
+  /* Section headings */
+  h1 {
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  p {
+    line-height: 1.6;
+    font-size: 1.1rem;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* About Card */
+  .about-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    background: rgba(155, 231, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(155, 231, 255, 0.1);
+    max-width: 900px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    transition: all 0.3s ease;
+  }
+
+  .about-card:hover {
+    box-shadow: 0 0 40px rgba(155, 231, 255, 0.6);
+    transform: translateY(-5px);
+  }
+
+  .about-card .about-image {
+    flex: 1 1 200px;
+    max-width: 250px;
+  }
+
+  .about-card .about-image img {
+    width: 100%;
+    border-radius: 12px;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 15px rgba(155, 231, 255, 0.3);
+  }
+
+  .about-card .about-text {
+    flex: 2 1 300px;
+    text-align: left;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  /* Tech Stack Grid - 8 columns */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 2rem;
+    justify-items: center;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  .tech-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: glow 2s infinite;
+  }
+
+  .tech-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 0 5px rgba(155, 231, 255, 0.5));
+  }
+
+  .tech-item span {
+    font-size: 0.9rem;
+    color: var(--accent);
+  }
+
+  .tech-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(155, 231, 255, 0.6);
+  }
+
+  @keyframes glow {
+    0%,100% { filter: drop-shadow(0 0 5px #9be7ff) drop-shadow(0 0 10px #9be7ff); }
+    50% { filter: drop-shadow(0 0 10px #9be7ff) drop-shadow(0 0 20px #9be7ff); }
+  }
+
+  /* Contact Form */
+  .contact-form-container {
+    background: rgba(155, 231, 255, 0.1);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(155, 231, 255, 0.2);
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .contact-form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .input-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input-group label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--accent);
+  }
+
+  .input-group input,
+  .input-group textarea {
+    padding: 1rem;
+    font-size: 1rem;
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    background: #02040a;
+    color: #fff;
+    transition: border 0.3s ease;
+  }
+
+  .input-group input:focus,
+  .input-group textarea:focus {
+    border-color: #9be7ff;
+    outline: none;
+  }
+
+  .input-group input::placeholder,
+  .input-group textarea::placeholder {
+    color: rgba(155, 231, 255, 0.6);
+  }
+
+  .submit-btn {
+    padding: 1rem;
+    font-size: 1.1rem;
+    background: var(--accent);
+    color: #02040a;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .submit-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(155, 231, 255, 0.4);
+  }
+
+  @media(max-width: 768px) {
+    .contact-form-container {
+      padding: 1.5rem;
+    }
+
+    .submit-btn {
+      padding: 0.8rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="name">Zeerak Kafeel</div>
+    <div class="tagline" id="tagline"></div>
+  </section>
+
+  <!-- About Me Section -->
+  <section id="about">
+    <h2>About Me</h2>
+    
+    <div class="about-card">
+      <div class="about-image">
+        <img src="./assets/me.png" alt="Zeerak Kafeel">
+      </div>
+      <div class="about-text">
+        <p>Hello! I'm Zeerak Kafeel, a <strong>Full Stack Developer</strong> with a passion for building scalable web applications. I also specialize in <strong>cloud solutions</strong>, enabling efficient and secure deployment of modern applications.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Section -->
+  <section id="tech">
+    <h1>Tech Stack</h1>
+    <div class="tech-grid">
+      <div class="tech-item">
+        <img src="./assets/tech/Azure.png" alt=".NET">
+        <span>Azure</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/AWS.png" alt="CSS">
+        <span>Aws</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/Google Cloud.png" alt="JavaScript">
+        <span>GCS</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/CSharp.png" alt="React">
+        <span>C#</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/Python.png" alt="Node.js">
+        <span>Python</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/JavaScript.png" alt="Express">
+        <span>JavaScript</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/TypeScript.png" alt="MongoDB">
+        <span>TypeScript</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/NET.png" alt=".NET">
+        <span>.Net Framework</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/NET core.png" alt="CSS">
+        <span>.Net Core</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/jQuery.png" alt="JavaScript">
+        <span>Jquery</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/Angular.png" alt="React">
+        <span>Angular</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/React.png" alt="Node.js">
+        <span>React</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/Azure SQL Database.png" alt="Express">
+        <span>Azure DB</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/Microsoft SQL Server.png" alt="MongoDB">
+        <span>Sql Server</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/Cosmos BD.png" alt="AWS">
+        <span>Cosmos DB</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/MySQL.png" alt="Express">
+        <span>My Sql</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/MongoDB.png" alt="MongoDB">
+        <span>MongoDB</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/GitHub.png" alt="MongoDB">
+        <span>Github</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/Azure Devops.png" alt="MongoDB">
+        <span>Azure Devops</span>
+      </div>
+      <div class="tech-item">
+        <img src="./assets/tech/Git.png" alt="MongoDB">
+        <span>Git</span>
+      </div>
+    </div>
+  </section>
+
+ <!-- Contact Me Section -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <p>If you'd like to get in touch, feel free to drop a message. I'll get back to you as soon as possible.</p>
+    
+    <div class="contact-form-container">
+      <form id="contact-form">
+        <div class="input-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your Name" required />
+        </div>
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Your Email" required />
+        </div>
+        <div class="input-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+    <p>Alternatively, you can reach me at <a href="mailto:zeerak@example.com">zeerak@example.com</a> or follow me on <a href="https://www.linkedin.com/in/zeerakkafeel/">LinkedIn</a> / <a href="https://github.com/IamZeek">GitHub</a>.</p>
+  </section>
+
+  <!-- Typing Script for Tagline -->
+  <script>
+    const phrases = [
+      "Frontend Developer",
+      "Backend Developer",
+      "FullStack Developer",
+      "Cloud Solution Architect"
+    ];
+
+    const taglineEl = document.getElementById("tagline");
+
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typingSpeed = 100;
+    const deletingSpeed = 50;
+    const delayAfterComplete = 2000;
+
+    function type() {
+      const currentPhrase = phrases[phraseIndex];
+
+      if (!isDeleting) {
+        taglineEl.textContent = currentPhrase.slice(0, charIndex + 1);
+        charIndex++;
+
+        if (charIndex === currentPhrase.length) {
+          isDeleting = true;
+          setTimeout(type, delayAfterComplete);
+          return;
+        }
+      } else {
+        taglineEl.textContent = currentPhrase.slice(0, charIndex - 1);
+        charIndex--;
+
+        if (charIndex === 0) {
+          isDeleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+        }
+      }
+
+      setTimeout(type, isDeleting ? deletingSpeed : typingSpeed);
+    }
+
+    type();
+  </script>
+  <!-- EmailJS Integration -->
+  <script type="text/javascript">
+    // Initialize EmailJS with your user ID
+    emailjs.init("user_your_api_key_here");
+
+    // Handle form submission
+    document.getElementById("contact-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const form = event.target;
+      const name = form.name.value;
+      const email = form.email.value;
+      const message = form.message.value;
+
+      const templateParams = {
+        name: name,
+        email: email,
+        message: message
+      };
+
+      // Send email using EmailJS
+      emailjs.send("service_id", "template_id", templateParams)
+        .then(function(response) {
+          alert("Message sent successfully!");
+          form.reset(); // Reset the form after successful submission
+        }, function(error) {
+          alert("Failed to send message. Please try again later.");
+        });
+    });
+  </script>
+
+</body>
+</html>
