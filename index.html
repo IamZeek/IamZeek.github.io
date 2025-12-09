@@ -1,4 +1,4 @@
-<!doctype html>
+<!doctype html> 
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -101,26 +101,29 @@
     box-shadow: 0 0 25px rgba(155,231,255,0.15);
     flex-wrap: wrap;
 
-    /* Start as a horizontal line for draw effect */
-    height: 4px;
-    max-height: 4px;
-    transform: scaleX(0);
-    transform-origin: left;
+    /* Animation initial state */
     opacity: 0;
-    border-left: 2px solid var(--accent);
-    transition:
-      transform 0.6s cubic-bezier(.25,.8,.25,1),
-      opacity 0.5s ease,
-      max-height 0.6s ease 0.4s,
-      padding 0.3s ease 0.5s;
+    transform: translateY(40px) scale(0.95);
+    transition: all 0.8s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  /* Glow animation */
   .about-card.show {
     opacity: 1;
-    transform: scaleX(1);
-    max-height: 600px; /* vertical expansion */
-    height: auto;
-    padding: 1.8rem;
+    transform: translateY(0) scale(1);
+    animation: glow-fade 1.5s ease forwards;
+  }
+
+  @keyframes glow-fade {
+    0% {
+      box-shadow: 0 0 10px rgba(155,231,255,0.6), 0 0 20px rgba(155,231,255,0.4);
+    }
+    50% {
+      box-shadow: 0 0 25px rgba(155,231,255,0.8), 0 0 40px rgba(155,231,255,0.6);
+    }
+    100% {
+      box-shadow: 0 0 15px rgba(155,231,255,0.5), 0 0 25px rgba(155,231,255,0.3);
+    }
   }
 
   .about-image {
@@ -132,14 +135,6 @@
     border-radius: 12px;
     border: 2px solid var(--accent);
     box-shadow: 0 0 10px rgba(155, 231, 255, 0.4);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s;
-  }
-
-  .about-card.show .about-image img {
-    opacity: 1;
-    transform: translateY(0);
   }
 
   .about-text {
@@ -147,14 +142,6 @@
     text-align: left;
     font-size: var(--text-size);
     line-height: 1.6;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease 0.55s, transform 0.6s ease 0.55s;
-  }
-
-  .about-card.show .about-text {
-    opacity: 1;
-    transform: translateY(0);
   }
 
   /* ---------- TECH GRID ---------- */
@@ -236,7 +223,6 @@
     box-shadow: 0 0 12px var(--accent);
   }
 
-  /* --- NEW ANIMATION STATES --- */
   .timeline-content {
     width: 45%;
     background: rgba(155, 231, 255, 0.08);
@@ -262,7 +248,6 @@
     transform: translate(-40px, 40px) scale(0.95);
   }
 
-  /* When element is visible */
   .timeline-content.show {
     opacity: 1;
     transform: translate(0, 0) scale(1);
@@ -274,7 +259,6 @@
     font-size: 0.9rem;
   }
 
-  /* Mobile */
   @media(max-width: 800px) {
     .timeline::before {
       left: 10%;
@@ -360,7 +344,6 @@
     transform: translateY(-4px);
   }
 
-  /* ---------- MOBILE ---------- */
   @media(max-width: 700px) {
     .about-card { text-align: center; }
     .about-text { text-align: center; }
@@ -492,49 +475,93 @@
       </div>
       <div class="input-group">
         <label>Message</label>
-        <textarea name="message" rows="6" required></textarea>
+        <textarea name="message" rows="5" required></textarea>
       </div>
-      <button type="submit" class="submit-btn">Send</button>
+
+      <button type="submit" class="submit-btn">Send Message</button>
     </form>
   </div>
+
+  <p>
+    Alternatively:  
+    <a href="mailto:zeerak@example.com" target="_blank">Email</a> •
+    <a href="https://www.linkedin.com/in/zeerakkafeel/" target="_blank">LinkedIn</a> •
+    <a href="https://github.com/IamZeek" target="_blank">GitHub</a>
+  </p>
 </section>
 
+<!-- Typer Script -->
 <script>
-  /* ---------- TYPING EFFECT ---------- */
-  const taglineText = "Full Stack Developer";
-  let index = 0;
-  function typeTagline() {
-    if (index <= taglineText.length) {
-      document.getElementById('tagline').innerText = taglineText.slice(0,index);
-      index++;
-      setTimeout(typeTagline, 120);
-    }
-  }
-  typeTagline();
+  const phrases = [
+    "Full Stack Developer 🦸🏽",
+    "Cloud Solution Architect ☁️",
+    "Database Architect 🗄️"
+  ];
 
-  /* ---------- ABOUT CARD ANIMATION ON SCROLL ---------- */
-  const aboutObserver = new IntersectionObserver((entries) => {
+  const el = document.getElementById("tagline");
+  let i = 0, j = 0, deleting = false;
+
+  function typeEffect() {
+    let word = phrases[i];
+
+    if (!deleting) {
+      el.textContent = word.substring(0, j++);
+      if (j === word.length + 1) {
+        deleting = true;
+        setTimeout(typeEffect, 1200);
+        return;
+      }
+    } else {
+      el.textContent = word.substring(0, j--);
+      if (j < 0) {
+        deleting = false;
+        i = (i + 1) % phrases.length;
+      }
+    }
+
+    setTimeout(typeEffect, deleting ? 60 : 90);
+  }
+
+  typeEffect();
+</script>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  emailjs.init("YOUR_EMAILJS_PUBLIC_KEY");
+
+  document.getElementById("contact-form").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+      name: this.name.value,
+      email: this.email.value,
+      message: this.message.value
+    })
+    .then(() => alert("Message sent!"))
+    .catch(() => alert("Failed to send message."));
+  });
+</script>
+
+<!-- SCROLL ANIMATION SCRIPT -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('show');
-        aboutObserver.unobserve(entry.target);
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
       }
     });
   }, { threshold: 0.3 });
-  aboutObserver.observe(document.querySelector('.about-card'));
 
-  /* ---------- TIMELINE ANIMATION ON SCROLL ---------- */
-  const timelineItems = document.querySelectorAll('.timeline-content');
-  const timelineObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('show');
-        timelineObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
+  // Observe timeline items
+  document.querySelectorAll(".timeline-content").forEach(item => {
+    observer.observe(item);
+  });
 
-  timelineItems.forEach(item => timelineObserver.observe(item));
+  // Observe About card
+  document.querySelectorAll(".about-card").forEach(item => {
+    observer.observe(item);
+  });
 </script>
 
 </body>
