@@ -28,6 +28,7 @@
      background-size: 150px 150px, 200px 200px, 250px 250px, 100px 100px, 100% 100%;
     animation: star-spin 180s linear infinite;
   }
+
  @keyframes star-spin {
     from {
       background-position:
@@ -38,6 +39,8 @@
         375% 25%, -290% 70%, 400% 80%, -280% 30%, 0 0;
     }
   }
+
+
   body {
     overflow-x: hidden;
   }
@@ -151,6 +154,114 @@
   .tech-item:hover {
     transform: translateY(-6px);
   }
+/* ---------- EXPERIENCE TIMELINE ---------- */
+#experience h2 {
+  color: var(--accent);
+  margin-bottom: 2rem;
+  font-size: clamp(1.5rem, 4vw, 2.3rem);
+}
+
+.timeline {
+  position: relative;
+  max-width: 900px;
+  margin: auto;
+  padding: 2rem 0;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 3px;
+  height: 100%;
+  background: rgba(155, 231, 255, 0.4);
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px rgba(155, 231, 255, 0.4);
+}
+
+.timeline-item {
+  position: relative;
+  width: 100%;
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  width: 18px;
+  height: 18px;
+  background: var(--accent);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 12px var(--accent);
+}
+
+.timeline-content {
+  width: 45%;
+  background: rgba(155, 231, 255, 0.08);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1.5px solid var(--accent);
+  box-shadow: 0 0 20px rgba(155, 231, 255, 0.15);
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+  margin-right: 55%;
+  text-align: right;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  margin-left: 55%;
+  text-align: left;
+}
+
+.exp-duration {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Mobile */
+@media(max-width: 800px) {
+  .timeline::before {
+    left: 10%;
+  }
+  
+  .timeline-dot {
+    left: 10%;
+  }
+  
+  .timeline-content {
+    width: 80%;
+    margin-left: 20% !important;
+    margin-right: 0 !important;
+    text-align: left !important;
+  }
+}
+
+/* ---------- RESUME BUTTON ---------- */
+.resume-btn {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 1rem 2rem;
+  background: var(--accent);
+  color: #02040a;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 0 15px rgba(155, 231, 255, 0.4);
+  transition: 0.3s ease;
+}
+
+.resume-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 22px rgba(155, 231, 255, 0.7);
+}
+
 
   /* ---------- CONTACT ---------- */
   .contact-form-container {
@@ -260,16 +371,66 @@
     <!-- Databases -->
     <div class="tech-item"><img src="./assets/tech/Azure SQL Database.png" alt="azuresql"><span>Azure SQL</span></div>
     <div class="tech-item"><img src="./assets/tech/Microsoft SQL Server.png" alt="sqlserver"><span>SQL Server</span></div>
-    <div class="tech-item"><img src="./assets/tech/Cosmos BD.png"><span>Cosmos DB</span></div>
-    <div class="tech-item"><img src="./assets/tech/MySQL.png"><span>MySQL</span></div>
-    <div class="tech-item"><img src="./assets/tech/MongoDB.png"><span>MongoDB</span></div>
+    <div class="tech-item"><img src="./assets/tech/Cosmos BD.png" alt="cosmos"><span>Cosmos DB</span></div>
+    <div class="tech-item"><img src="./assets/tech/MySQL.png" alt="mysql"><span>MySQL</span></div>
+    <div class="tech-item"><img src="./assets/tech/MongoDB.png" alt="mongo"><span>MongoDB</span></div>
 
     <!-- Tools -->
-    <div class="tech-item"><img src="./assets/tech/GitHub.png"><span>GitHub</span></div>
-    <div class="tech-item"><img src="./assets/tech/Azure Devops.png"><span>Azure DevOps</span></div>
-    <div class="tech-item"><img src="./assets/tech/Git.png"><span>Git</span></div>
+    <div class="tech-item"><img src="./assets/tech/GitHub.png" alt="githu"><span>GitHub</span></div>
+    <div class="tech-item"><img src="./assets/tech/Azure Devops.png" alt="azdevops"><span>Azure DevOps</span></div>
+    <div class="tech-item"><img src="./assets/tech/Git.png" alt="git"><span>Git</span></div>
 
   </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <h2>Experience</h2>
+
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <h3>Senior Full Stack Developer — Merik Solutions</h3>
+        <span class="exp-duration">2023 — Present</span>
+        <p>
+          Building scalable cloud-based applications, integrating CI/CD,
+          and optimizing distributed systems with Azure + .NET Core.
+        </p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <h3>Full Stack Developer — Valued Cart</h3>
+        <span class="exp-duration">2022 — 2023</span>
+        <p>
+          Developed complete ERP,HRM system for the company's needs,
+          The App was designed to resolve all their financial and managerial issues.
+        </p>
+      </div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <h3>FullStack Developer — SoftTech</h3>
+        <span class="exp-duration">2018 — 2022</span>
+        <p>
+          Contributed to full-stack features, database tuning, and UI
+          enhancements for rapidly growing ERP Systems and POS Systems.
+        </p>
+      </div>
+    </div>
+
+  </div>
+  <a href="./assets/resume/Zeerak_Kafeel_CV.pdf" 
+     download 
+     class="resume-btn">
+     ⬇️ Download Resume
+  </a>
 </section>
 
 <!-- CONTACT -->
