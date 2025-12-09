@@ -40,7 +40,6 @@
     }
   }
 
-
   body {
     overflow-x: hidden;
   }
@@ -56,7 +55,8 @@
     align-items: center;
     text-align: center;
   }
-  a{
+
+  a {
     text-decoration: none;
     color: var(--accent);
   }
@@ -100,18 +100,46 @@
     border-radius: 14px;
     box-shadow: 0 0 25px rgba(155,231,255,0.15);
     flex-wrap: wrap;
+
+    /* Start as a horizontal line for draw effect */
+    height: 4px;
+    max-height: 4px;
+    transform: scaleX(0);
+    transform-origin: left;
+    opacity: 0;
+    border-left: 2px solid var(--accent);
+    transition:
+      transform 0.6s cubic-bezier(.25,.8,.25,1),
+      opacity 0.5s ease,
+      max-height 0.6s ease 0.4s,
+      padding 0.3s ease 0.5s;
+  }
+
+  .about-card.show {
+    opacity: 1;
+    transform: scaleX(1);
+    max-height: 600px; /* vertical expansion */
+    height: auto;
+    padding: 1.8rem;
   }
 
   .about-image {
     flex: 1 1 240px;
   }
 
-
   .about-image img {
     width: 100%;
     border-radius: 12px;
     border: 2px solid var(--accent);
     box-shadow: 0 0 10px rgba(155, 231, 255, 0.4);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease 0.5s, transform 0.6s ease 0.5s;
+  }
+
+  .about-card.show .about-image img {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .about-text {
@@ -119,6 +147,14 @@
     text-align: left;
     font-size: var(--text-size);
     line-height: 1.6;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease 0.55s, transform 0.6s ease 0.55s;
+  }
+
+  .about-card.show .about-text {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   /* ---------- TECH GRID ---------- */
@@ -154,114 +190,127 @@
   .tech-item:hover {
     transform: translateY(-6px);
   }
-/* ---------- EXPERIENCE TIMELINE ---------- */
-#experience h2 {
-  color: var(--accent);
-  margin-bottom: 2rem;
-  font-size: clamp(1.5rem, 4vw, 2.3rem);
-}
 
-.timeline {
-  position: relative;
-  max-width: 900px;
-  margin: auto;
-  padding: 2rem 0;
-}
+  /* ---------- EXPERIENCE TIMELINE ---------- */
+  #experience h2 {
+    color: var(--accent);
+    margin-bottom: 2rem;
+    font-size: clamp(1.5rem, 4vw, 2.3rem);
+  }
 
-.timeline::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 3px;
-  height: 100%;
-  background: rgba(155, 231, 255, 0.4);
-  transform: translateX(-50%);
-  box-shadow: 0 0 10px rgba(155, 231, 255, 0.4);
-}
+  .timeline {
+    position: relative;
+    max-width: 900px;
+    margin: auto;
+    padding: 2rem 0;
+  }
 
-.timeline-item {
-  position: relative;
-  width: 100%;
-  margin: 2rem 0;
-  display: flex;
-  justify-content: center;
-}
-
-.timeline-dot {
-  position: absolute;
-  left: 50%;
-  width: 18px;
-  height: 18px;
-  background: var(--accent);
-  border-radius: 50%;
-  transform: translateX(-50%);
-  box-shadow: 0 0 12px var(--accent);
-}
-
-.timeline-content {
-  width: 45%;
-  background: rgba(155, 231, 255, 0.08);
-  padding: 1.5rem;
-  border-radius: 12px;
-  border: 1.5px solid var(--accent);
-  box-shadow: 0 0 20px rgba(155, 231, 255, 0.15);
-}
-
-.timeline-item:nth-child(odd) .timeline-content {
-  margin-right: 55%;
-  text-align: right;
-}
-
-.timeline-item:nth-child(even) .timeline-content {
-  margin-left: 55%;
-  text-align: left;
-}
-
-.exp-duration {
-  color: var(--accent);
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-/* Mobile */
-@media(max-width: 800px) {
   .timeline::before {
-    left: 10%;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 3px;
+    height: 100%;
+    background: rgba(155, 231, 255, 0.4);
+    transform: translateX(-50%);
+    box-shadow: 0 0 10px rgba(155, 231, 255, 0.4);
   }
-  
+
+  .timeline-item {
+    position: relative;
+    width: 100%;
+    margin: 2rem 0;
+    display: flex;
+    justify-content: center;
+  }
+
   .timeline-dot {
-    left: 10%;
+    position: absolute;
+    left: 50%;
+    width: 18px;
+    height: 18px;
+    background: var(--accent);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 12px var(--accent);
   }
-  
+
+  /* --- NEW ANIMATION STATES --- */
   .timeline-content {
-    width: 80%;
-    margin-left: 20% !important;
-    margin-right: 0 !important;
-    text-align: left !important;
+    width: 45%;
+    background: rgba(155, 231, 255, 0.08);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1.5px solid var(--accent);
+    box-shadow: 0 0 20px rgba(155, 231, 255, 0.15);
+
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    transition: all 0.7s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
-}
 
-/* ---------- RESUME BUTTON ---------- */
-.resume-btn {
-  display: inline-block;
-  margin-top: 2rem;
-  padding: 1rem 2rem;
-  background: var(--accent);
-  color: #02040a;
-  font-size: 1.1rem;
-  font-weight: 700;
-  border-radius: 10px;
-  text-decoration: none;
-  box-shadow: 0 0 15px rgba(155, 231, 255, 0.4);
-  transition: 0.3s ease;
-}
+  .timeline-item:nth-child(odd) .timeline-content {
+    margin-right: 55%;
+    text-align: right;
+    transform: translate(40px, 40px) scale(0.95);
+  }
 
-.resume-btn:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 22px rgba(155, 231, 255, 0.7);
-}
+  .timeline-item:nth-child(even) .timeline-content {
+    margin-left: 55%;
+    text-align: left;
+    transform: translate(-40px, 40px) scale(0.95);
+  }
 
+  /* When element is visible */
+  .timeline-content.show {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+
+  .exp-duration {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  /* Mobile */
+  @media(max-width: 800px) {
+    .timeline::before {
+      left: 10%;
+    }
+    
+    .timeline-dot {
+      left: 10%;
+    }
+    
+    .timeline-content {
+      width: 80%;
+      margin-left: 20% !important;
+      margin-right: 0 !important;
+      text-align: left !important;
+    }
+  }
+
+  /* ---------- RESUME BUTTON ---------- */
+  .resume-btn {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 1rem 2rem;
+    background: var(--accent);
+    color: #02040a;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 10px;
+    text-decoration: none;
+    box-shadow: 0 0 15px rgba(155, 231, 255, 0.4);
+    transition: 0.3s ease;
+  }
+
+  .resume-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 22px rgba(155, 231, 255, 0.7);
+  }
 
   /* ---------- CONTACT ---------- */
   .contact-form-container {
@@ -316,6 +365,7 @@
     .about-card { text-align: center; }
     .about-text { text-align: center; }
   }
+
 </style>
 </head>
 
@@ -347,39 +397,31 @@
 <!-- TECH -->
 <section id="tech">
   <h1>Tech Stack</h1>
-
   <div class="tech-grid">
-
-    <!-- Cloud -->
     <div class="tech-item"><img src="./assets/tech/Azure.png" alt="Azure"><span>Azure</span></div>
     <div class="tech-item"><img src="./assets/tech/AWS.png" alt="AWS"><span>AWS</span></div>
     <div class="tech-item"><img src="./assets/tech/Google Cloud.png" alt="GCP"><span>GCP</span></div>
 
-    <!-- Languages -->
     <div class="tech-item"><img src="./assets/tech/CSharp.png" alt="C#"><span>C#</span></div>
     <div class="tech-item"><img src="./assets/tech/Python.png" alt="Python"><span>Python</span></div>
-    <div class="tech-item"><img src="./assets/tech/JavaScript.png" alt="JavaScript"><span>JavaScript</span></div>
+    <div class="tech-item"><img src="./assets/tech/JavaScript.png" alt="JS"><span>JavaScript</span></div>
     <div class="tech-item"><img src="./assets/tech/TypeScript.png" alt="TS"><span>TypeScript</span></div>
 
-    <!-- Frameworks -->
     <div class="tech-item"><img src="./assets/tech/NET.png" alt="netframework"><span>.NET Framework</span></div>
     <div class="tech-item"><img src="./assets/tech/NET core.png" alt="netcore"><span>.NET Core</span></div>
     <div class="tech-item"><img src="./assets/tech/jQuery.png" alt="jquery"><span>jQuery</span></div>
     <div class="tech-item"><img src="./assets/tech/Angular.png" alt="angular"><span>Angular</span></div>
     <div class="tech-item"><img src="./assets/tech/React.png" alt="react"><span>React</span></div>
 
-    <!-- Databases -->
     <div class="tech-item"><img src="./assets/tech/Azure SQL Database.png" alt="azuresql"><span>Azure SQL</span></div>
     <div class="tech-item"><img src="./assets/tech/Microsoft SQL Server.png" alt="sqlserver"><span>SQL Server</span></div>
     <div class="tech-item"><img src="./assets/tech/Cosmos BD.png" alt="cosmos"><span>Cosmos DB</span></div>
     <div class="tech-item"><img src="./assets/tech/MySQL.png" alt="mysql"><span>MySQL</span></div>
     <div class="tech-item"><img src="./assets/tech/MongoDB.png" alt="mongo"><span>MongoDB</span></div>
 
-    <!-- Tools -->
-    <div class="tech-item"><img src="./assets/tech/GitHub.png" alt="githu"><span>GitHub</span></div>
+    <div class="tech-item"><img src="./assets/tech/GitHub.png" alt="github"><span>GitHub</span></div>
     <div class="tech-item"><img src="./assets/tech/Azure Devops.png" alt="azdevops"><span>Azure DevOps</span></div>
     <div class="tech-item"><img src="./assets/tech/Git.png" alt="git"><span>Git</span></div>
-
   </div>
 </section>
 
@@ -407,8 +449,8 @@
         <h3>Full Stack Developer — Valued Cart</h3>
         <span class="exp-duration">2022 — 2023</span>
         <p>
-          Developed complete ERP,HRM system for the company's needs,
-          The App was designed to resolve all their financial and managerial issues.
+          Developed an ERP & HRM system tailored to business needs, solving
+          financial and managerial challenges through automation.
         </p>
       </div>
     </div>
@@ -426,11 +468,11 @@
     </div>
 
   </div>
-  <a href="./assets/resume/Zeerak_Kafeel_CV.pdf" 
-     download 
-     class="resume-btn">
-     ⬇️ Download Resume
+
+  <a href="./assets/resume/Zeerak_Kafeel_CV.pdf" download class="resume-btn">
+    Download Resume
   </a>
+
 </section>
 
 <!-- CONTACT -->
@@ -450,74 +492,49 @@
       </div>
       <div class="input-group">
         <label>Message</label>
-        <textarea name="message" rows="5" required></textarea>
+        <textarea name="message" rows="6" required></textarea>
       </div>
-
-      <button type="submit" class="submit-btn">Send Message</button>
+      <button type="submit" class="submit-btn">Send</button>
     </form>
   </div>
-
-  <p>
-    Alternatively:  
-    <a href="mailto:zeerak@example.com" target="_blank">Email</a> •
-    <a href="https://www.linkedin.com/in/zeerakkafeel/" target="_blank">LinkedIn</a> •
-    <a href="https://github.com/IamZeek" target="_blank">GitHub</a>
-  </p>
 </section>
 
-<!-- Typer Script -->
 <script>
-  const phrases = [
-    "Frontend Developer ✨",
-    "Backend Developer 🔧",
-    "Full Stack Developer 🦸🏽",
-    "Cloud Solution Architect ☁️",
-    "Database Architect 🗄️"
-  ];
-
-  const el = document.getElementById("tagline");
-  let i = 0, j = 0, deleting = false;
-
-  function typeEffect() {
-    let word = phrases[i];
-
-    if (!deleting) {
-      el.textContent = word.substring(0, j++);
-      if (j === word.length + 1) {
-        deleting = true;
-        setTimeout(typeEffect, 1200);
-        return;
-      }
-    } else {
-      el.textContent = word.substring(0, j--);
-      if (j < 0) {
-        deleting = false;
-        i = (i + 1) % phrases.length;
-      }
+  /* ---------- TYPING EFFECT ---------- */
+  const taglineText = "Full Stack Developer";
+  let index = 0;
+  function typeTagline() {
+    if (index <= taglineText.length) {
+      document.getElementById('tagline').innerText = taglineText.slice(0,index);
+      index++;
+      setTimeout(typeTagline, 120);
     }
-
-    setTimeout(typeEffect, deleting ? 60 : 90);
   }
+  typeTagline();
 
-  typeEffect();
-</script>
+  /* ---------- ABOUT CARD ANIMATION ON SCROLL ---------- */
+  const aboutObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+        aboutObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  aboutObserver.observe(document.querySelector('.about-card'));
 
-<!-- EmailJS -->
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script>
-  emailjs.init("YOUR_EMAILJS_PUBLIC_KEY");
+  /* ---------- TIMELINE ANIMATION ON SCROLL ---------- */
+  const timelineItems = document.querySelectorAll('.timeline-content');
+  const timelineObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('show');
+        timelineObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
 
-  document.getElementById("contact-form").addEventListener("submit", function(e){
-    e.preventDefault();
-
-    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
-      name: this.name.value,
-      email: this.email.value,
-      message: this.message.value
-    })
-    .then(() => alert("Message sent!"))
-    .catch(() => alert("Failed to send message."));
-  });
+  timelineItems.forEach(item => timelineObserver.observe(item));
 </script>
 
 </body>
